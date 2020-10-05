@@ -12,7 +12,7 @@
       </div>
       <div class="column">
         <p class="title is-6 mb-5 has-text-centered" style="color: #7F3CD2">Business Data Lake</p>
-        <BDL :search = "bdlResponse" style="margin-bottom: 20px" />
+        <BDL :search = "bdlResponse" style="margin-bottom: 20px; width: 400px" />
         <L2 :l2Objects = "l2Objects" />
         <L3 :search = "searchField" />
         <BDLenhanced />

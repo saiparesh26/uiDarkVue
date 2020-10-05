@@ -4,7 +4,7 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <p class="subtitle is-6 has-text-white">Downstream Objects L3</p>
+                        <span class="tag is-primary" style="border-radius: 50%; height:30px; background: #EF3B43"> L3</span>
                     </div>
                 </div>
                 <div class="level-right" style="margin-left: 125px">

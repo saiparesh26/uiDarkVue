@@ -4,10 +4,10 @@
             <div class="level">
                 <div class="level-left">
                     <div class="level-item">
-                        <p class="subtitle is-6 has-text-white">Downstream Objects L2</p>
+                        <span class="tag is-primary" style="border-radius: 50%; height:30px; background:#FE7E4C"> L2</span>
                     </div>
                 </div>
-                <div class="level-right" style="margin-left: 125px">
+                <div class="level-right">
                     <div class="level-item">
                         <a @click="onShowL2"> <i id = "mainIconL2" class="fas fa-plus"></i> </a>
                     </div>
@@ -43,9 +43,8 @@
             </div>
             <hr class="hr"> -->
             <div v-for="l2Object in l2Objects" :key="l2Object.ID">
-                <p class="has-text-white subtitle is-6"> ID : {{ l2Object.ID }} </p>
-                <p class="has-text-white subtitle is-6"> Name : {{ l2Object.Name }} </p>
-                <p class="has-text-white subtitle is-6"> Platform : {{ l2Object.Platform }} </p>
+                <!-- <p class="has-text-white subtitle is-6"> Name : {{ l2Object.Name }}</p> -->
+                 <Detail :search = 'l2Object.Name' />
                 <hr class="hr">
             </div>
         </div>
@@ -54,15 +53,20 @@
 
 <script>
 import 'bulma/css/bulma.css'
+import Detail from './details.vue';
 export default {
     props: {
         l2Objects: {
             type: Array
         }
     },
+    components: {
+        Detail
+    },
     data: function(){
         return {
-            openL2: false
+            openL2: false,
+            l2Names: []
         }
     },
     methods: {
@@ -77,6 +81,11 @@ export default {
                 mainIconL2.classList.add('fa-minus');
                 mainIconL2.classList.remove('fa-plus');
             }
+            // for(let i = 0 ; i< l2Objects.length; i++){
+            //     this.l2Names[i] = this.l2Objects[i].Name;
+            //     console.log(this.l2Names[i]);
+            // }
+            
         }
     }
 }
@@ -84,7 +93,7 @@ export default {
 
 <style scoped>
     .message{
-        width: 350px;
+        width: 400px;
     }
     .message-body{
         background: #7F3CD2;

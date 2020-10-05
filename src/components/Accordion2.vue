@@ -58,7 +58,7 @@ export default {
             }
         },
         onFileType: function(){
-            console.log('file type clicked');
+            // console.log('file type clicked');
         }
     }
 }

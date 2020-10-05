@@ -10,7 +10,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item" >
-                            <a @click="onShow"> <i id = "mainIcon" class="fas fa-plus"></i> </a>
+                            <a @click="onShow"> <i id = "mainIcon" ref="mainIcon" class="fas fa-plus"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -25,7 +25,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'fileIcon' class="fas fa-plus has-text-white" @click="showFileType"></i> </a>
+                            <a> <i id = 'fileIcon' ref="fileIcon" class="fas fa-plus has-text-white" @click="showFileType"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'regionIcon' class="fas fa-plus has-text-white" @click="showRegions"></i> </a>
+                            <a> <i id = 'regionIcon' ref="regionIcon" class="fas fa-plus has-text-white" @click="showRegions"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'noteBookIcon' class="fas fa-plus has-text-white" @click="showNotebooks"></i> </a>
+                            <a> <i id = 'noteBookIcon' ref="noteBookIcon" class="fas fa-plus has-text-white" @click="showNotebooks"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -84,15 +84,13 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'attributeIcon' class="fas fa-plus has-text-white" @click="showAttributes"></i> </a>
+                            <a> <i id = 'attributeIcon' ref="attributeIcon" class="fas fa-plus has-text-white" @click="showAttributes"></i> </a>
                         </div>
                     </div>
                 </div>
                 <div v-if="showAttribute">
-                    <div v-for="attribute in attributes.slice(0,5)" :key='attribute'>
-                        <p class="has-text-white subtitle font-12">ID :  {{ attribute.target_object_attribute_id }} </p>
+                    <div v-for="attribute in attributes.slice(0,5)" :key='attribute'>                        
                         <p class="has-text-white subtitle font-12"> Name :  {{ attribute.target_object_attribute_name }} </p>
-                        <p class="has-text-white subtitle font-12"> Data type :  {{ attribute.data_type }} </p>            
                         <hr class="hr">
                     </div>
                 </div>
@@ -194,7 +192,7 @@ export default {
             axios.get(`http://10.100.252.137:25009/getnotebookpath/${this.search}`)
              .then(res => {
                  this.notebooks = JSON.parse(res.data);
-                 console.log(this.notebooks);
+                //  console.log(this.notebooks);
              })
              .catch(err => {
                  console.log(err);
@@ -207,7 +205,7 @@ export default {
             axios.get(`http://10.100.252.137:25009/getattributes/${this.search}`)
              .then(res => {
                  this.attributes = JSON.parse(res.data);
-                 console.log(this.attributes);
+                //  console.log(this.attributes);
              })
              .catch(err => {
                  console.log(err);
@@ -234,9 +232,9 @@ export default {
         background: white;
         opacity: 0.2;
     }
-    .message{
+    /* .message{
         width: 350px;
-    }
+    } */
     .message-body{
         background: #7F3CD2;
     }
