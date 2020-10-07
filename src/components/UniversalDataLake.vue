@@ -7,11 +7,11 @@
                             <p class="subtitle is-6 has-text-white">{{ source[0].Object}}</p>                            
                         </div>
                 </div> 
-                <div class="level">
+                <!-- <div class="level">
                         <div class="level-item">
                             <p class="subtitle is-6 has-text-white"> {{ id }} </p>                            
                         </div>
-                </div>            
+                </div>             -->
             </div>
         </article>
     </div>
