@@ -12,14 +12,15 @@
       </div>
       <div class="column">
         <p class="title is-6 mb-5 mt-5 has-text-centered" style="color: #7F3CD2">Business Data Lake</p>
-        <BDL :search = "bdlResponse" style="margin-bottom: 50px; width: 400px" />
+        <BDL :search = "bdlResponse" style="margin-bottom: 30px; width: 400px" />
         <L2 :l2Objects = "l2Objects" />
         <L3 :l3Objects = "l3Objects" />
         <BDLenhanced :bdlenhancedObjects = "bdlenhancedObjects" />
       </div>
       <div class="column">
         <p class="title is-6 mb-5 mt-5 has-text-centered" style="color: #CF21FE">Product Data Store</p>
-        <PDS :search = "bdlResponse" style="margin-bottom: 50px; width: 400px" />
+        <PDS :search = "bdlResponse" style="margin-bottom: 30px; width: 400px" />
+        <PDSRolePlay :pdsRolePlayObjects = "pdsRolePlayObjects"/>
       </div>
     </div>
   </div>
@@ -31,6 +32,7 @@ import Topbar from './components/Topbar.vue';
 import UniversalDatalake from './components/UniversalDataLake.vue';
 import BDL from './components/details2.vue';
 import PDS from './components/details_pds.vue';
+import PDSRolePlay from './components/PDSRoleplay.vue';
 import L2 from './components/L2.vue';
 import L3 from './components/L3.vue';
 import BDLenhanced from './components/BDLEnhanced.vue';
@@ -48,7 +50,8 @@ export default {
         id: null,
         l2Objects: null,
         l3Objects: null,
-        bdlenhancedObjects: null
+        bdlenhancedObjects: null,
+        pdsRolePlayObjects: null
       }
   },
   components: {
@@ -60,7 +63,8 @@ export default {
     L3,
     BDLenhanced,
     BackToDashboard,
-    PDS
+    PDS,
+    PDSRolePlay
   },
   methods: {
     getSearchField: function(item){
@@ -113,6 +117,16 @@ export default {
        .then(res => {
          this.bdlenhancedObjects = JSON.parse(res.data);
          console.log(this.bdlenhancedObjects); 
+       })
+       .catch(err => {
+         console.log(err);
+       })
+
+       // PDS role play objects 
+       axios.get(`http://10.100.252.137:25009/getpdsobjects/${this.searchField}`)
+       .then(res => {
+         this.pdsRolePlayObjects = JSON.parse(res.data);
+         console.log(this.pdsRolePlayObjects); 
        })
        .catch(err => {
          console.log(err);

@@ -29,7 +29,7 @@
                         <section class="modal-card-body">
                         <!-- Content ... -->
                         <!-- File types -->
-                        <div>
+                        <!-- <div>
                             <p class="title is-5">File Types Generated</p>  
                                 <div class="content">                          
                                     <ul>
@@ -37,10 +37,10 @@
                                     </ul>
                                 </div>                            
                             <hr class="hr">
-                        </div>
+                        </div> -->
 
                         <!-- Pipelines -->
-                        <div>
+                        <!-- <div>
                             <p class="title is-5">Pipelines Direct Linked</p>
                             <div class="content">  
                                 <ul>
@@ -53,7 +53,7 @@
                                 </ul>
                             </div>  
                             <hr class="hr">                             
-                        </div>    
+                        </div>     -->
 
                         <!-- Notebook -->
                         <!-- <div>

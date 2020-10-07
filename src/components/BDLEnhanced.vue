@@ -50,18 +50,15 @@ export default {
         onShowBDL: function(){
             this.openBDL = !this.openBDL;
             let mainIconBDL = document.getElementById('mainIconBDL');
-            if(!this.openL2){
+            if(!this.openBDL){
                 mainIconBDL.classList.remove('fa-mius');
                 mainIconBDL.classList.add('fa-plus');
             }
-            if(this.openL2){
+            if(this.openBDL){
                 mainIconBDL.classList.add('fa-minus');
                 mainIconBDL.classList.remove('fa-plus');
             }
-            // for(let i = 0 ; i< l2Objects.length; i++){
-            //     this.l2Names[i] = this.l2Objects[i].Name;
-            //     console.log(this.l2Names[i]);
-            // }
+            
             
         }
     }

@@ -58,10 +58,7 @@ export default {
                 mainIconL2.classList.add('fa-minus');
                 mainIconL2.classList.remove('fa-plus');
             }
-            // for(let i = 0 ; i< l2Objects.length; i++){
-            //     this.l2Names[i] = this.l2Objects[i].Name;
-            //     console.log(this.l2Names[i]);
-            // }
+        
             
         }
     }

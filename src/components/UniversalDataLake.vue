@@ -39,7 +39,7 @@ export default {
 
 <style scoped>
     .message{
-        width: 350px;
+        width: 400px;
         background: #484AA7;
     }
     .message-body{
