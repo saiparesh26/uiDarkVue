@@ -2,23 +2,24 @@
   <div id="app" >
     <Topbar />
     <Navbar @searchItemClicked = 'getSearchField' />
-    <BackToDashboard />
-    <hr id="hr" class="mx-5">
+    <BackToDashboard :search = 'searchField' />
+    <!-- <hr id="hr" class="mx-5"> -->
     <!-- {{ searchField }} -->
     <div class="columns">
       <div class="column">
-        <p class="title is-6 mb-5 has-text-centered" style="color: #5976D4">Universal Data Lake</p>
+        <p class="title is-6 mb-5 mt-5 has-text-centered" style="color: #5976D4">Universal Data Lake</p>
         <UniversalDatalake :source = 'udlResponse' :id = 'id' />
       </div>
       <div class="column">
-        <p class="title is-6 mb-5 has-text-centered" style="color: #7F3CD2">Business Data Lake</p>
-        <BDL :search = "bdlResponse" style="margin-bottom: 20px; width: 400px" />
+        <p class="title is-6 mb-5 mt-5 has-text-centered" style="color: #7F3CD2">Business Data Lake</p>
+        <BDL :search = "bdlResponse" style="margin-bottom: 50px; width: 400px" />
         <L2 :l2Objects = "l2Objects" />
-        <L3 :search = "searchField" />
-        <BDLenhanced />
+        <L3 :l3Objects = "l3Objects" />
+        <BDLenhanced :bdlenhancedObjects = "bdlenhancedObjects" />
       </div>
       <div class="column">
-        <p class="title is-6 mb-5 has-text-centered" style="color: #7F3CD2">Product Data Store</p>
+        <p class="title is-6 mb-5 mt-5 has-text-centered" style="color: #CF21FE">Product Data Store</p>
+        <PDS :search = "bdlResponse" style="margin-bottom: 50px; width: 400px" />
       </div>
     </div>
   </div>
@@ -28,7 +29,8 @@
 import 'bulma/css/bulma.css'
 import Topbar from './components/Topbar.vue';
 import UniversalDatalake from './components/UniversalDataLake.vue';
-import BDL from './components/details.vue';
+import BDL from './components/details2.vue';
+import PDS from './components/details_pds.vue';
 import L2 from './components/L2.vue';
 import L3 from './components/L3.vue';
 import BDLenhanced from './components/BDLEnhanced.vue';
@@ -44,7 +46,9 @@ export default {
         udlResponse: null,
         bdlResponse: null,
         id: null,
-        l2Objects: null
+        l2Objects: null,
+        l3Objects: null,
+        bdlenhancedObjects: null
       }
   },
   components: {
@@ -55,7 +59,8 @@ export default {
     L2,
     L3,
     BDLenhanced,
-    BackToDashboard
+    BackToDashboard,
+    PDS
   },
   methods: {
     getSearchField: function(item){
@@ -92,6 +97,26 @@ export default {
        .catch(err => {
          console.log(err);
        })
+
+       // L3 objects 
+       axios.get(`http://10.100.252.137:25009/getl3objects/${this.searchField}`)
+       .then(res => {
+         this.l3Objects = JSON.parse(res.data);
+         console.log(this.l3Objects); 
+       })
+       .catch(err => {
+         console.log(err);
+       })
+
+       // BDL enhanced objects 
+       axios.get(`http://10.100.252.137:25009/getbdlenhancedobjects/${this.searchField}`)
+       .then(res => {
+         this.bdlenhancedObjects = JSON.parse(res.data);
+         console.log(this.bdlenhancedObjects); 
+       })
+       .catch(err => {
+         console.log(err);
+       })
     }
   }
 }
@@ -102,11 +127,5 @@ export default {
   min-height: 1024px;
   background: #0F212C;
 }
-#hr{
-  margin-bottom: 100px;
-  border: 0;
-  height: 1px;
-  background: white;
-  opacity: 0.3;
-}
+
 </style>

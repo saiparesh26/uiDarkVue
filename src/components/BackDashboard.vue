@@ -1,5 +1,5 @@
 <template>
-    <section class="m" style="background: #0F212C;">
+    <section class="m" style="background: #0F212C;" v-if="search">
       <div>
         <div class=" ml-5 mb-3 pt-3">
           <p class="has-text-white"> <span> <a> <i class="fas fa-chevron-circle-left"></i> </a></span> Back to Dashboard</p>
@@ -7,7 +7,7 @@
         <div class="level pb-3">
           <div class="level-left ml-5">
             <div class="level-item">
-              <p class="title is-6 has-text-white"> Billing Document Line</p>
+              <p class="title is-6 has-text-white"> {{search}}</p>
             </div>
           </div>
           <div class="level-right mr-5">
@@ -16,12 +16,27 @@
           </div>
         </div>
       </div>
-      
+      <hr id="hr" class="mx-5">
     </section>
 </template>
 
 <script>
 export default {
+  props: {
+    search: {
+      type: String
+    }
+  }
     
 }
 </script>
+
+<style scoped>
+#hr{
+  margin-bottom: 100px;
+  border: 0;
+  height: 1px;
+  background: white;
+  opacity: 0.3;
+}
+</style>

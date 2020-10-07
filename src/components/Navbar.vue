@@ -86,5 +86,6 @@ export default {
     #li{
         border-bottom: 1px solid black;
         height: 50px;
+        cursor: pointer;
     }
 </style>

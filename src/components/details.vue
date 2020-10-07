@@ -5,12 +5,15 @@
                 <div class="level">
                     <div class="level-left">
                         <div class="level-item">
-                            <p class="subtitle is-6 has-text-white"> {{search}} </p>
+                            <p class="subtitle is-6 has-text-white"> {{search}}                                 
+                                <span v-if="badge === 'L2'" class="tag" style="border-radius: 50%; height:30px; background:#FE7E4C; margin-left: 10px"> {{badge}} </span>
+                                <span v-if="badge === 'L3'" class="tag" style="border-radius: 50%; height:30px; background:#EF3B43; margin-left: 10px"> {{badge}} </span>  
+                            </p>
                         </div>
                     </div>
                     <div class="level-right">
                         <div class="level-item" >
-                            <a @click="onShow"> <i id = "mainIcon" ref="mainIcon" class="fas fa-plus"></i> </a>
+                            <a @click="onShow"> <i :id = "uuidMainIcon" ref="mainIcon" class="fas fa-plus"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -25,7 +28,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'fileIcon' ref="fileIcon" class="fas fa-plus has-text-white" @click="showFileType"></i> </a>
+                            <a> <i :id = 'uuidFileIcon' ref="fileIcon" class="fas fa-plus has-text-white" @click="showFileType"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -44,7 +47,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'regionIcon' ref="regionIcon" class="fas fa-plus has-text-white" @click="showRegions"></i> </a>
+                            <a> <i :id = 'uuidRegionIcon' ref="regionIcon" class="fas fa-plus has-text-white" @click="showRegions"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -65,7 +68,7 @@
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'noteBookIcon' ref="noteBookIcon" class="fas fa-plus has-text-white" @click="showNotebooks"></i> </a>
+                            <a> <i :id = 'uuidNoteBookIcon' ref="noteBookIcon" class="fas fa-plus has-text-white" @click="showNotebooks"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -79,12 +82,12 @@
                 <div class="level">
                     <div class="level-left">
                         <div class="level-item has-text-white">
-                            Attributes({{ attributes.length }}) 
+                            Attributes({{ attributes.length }}) <span class="ml-2 mt-2"> <button class="button is-small is-rounded is-warning" @click="showModalData">  Show All </button> </span>
                         </div>
                     </div>
                     <div class="level-right">
                         <div class="level-item">
-                            <a> <i id = 'attributeIcon' ref="attributeIcon" class="fas fa-plus has-text-white" @click="showAttributes"></i> </a>
+                            <a> <i :id = 'uuidAttributeIcon' ref="attributeIcon" class="fas fa-plus has-text-white" @click="showAttributes"></i> </a>
                         </div>
                     </div>
                 </div>
@@ -92,6 +95,21 @@
                     <div v-for="attribute in attributes.slice(0,5)" :key='attribute'>                        
                         <p class="has-text-white subtitle font-12"> Name :  {{ attribute.target_object_attribute_name }} </p>
                         <hr class="hr">
+                    </div>
+                </div>
+                <div class="modal" ref="modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                        <p class="modal-card-title"> Attributes </p>
+                        <button class="delete" aria-label="close" @click="closeModal"></button>
+                        </header>
+                        <section class="modal-card-body">
+                        <!-- Content ... -->
+                        
+                        </section>
+                        <footer class="modal-card-foot">                            
+                        </footer>
                     </div>
                 </div>
                 <hr class="hr">                           
@@ -102,6 +120,7 @@
 
 <script>
 import axios from 'axios';
+import { uuid } from 'vue-uuid';
 export default {
     data: function(){
         return {
@@ -115,18 +134,27 @@ export default {
             showAttribute: true,
             attributes: [],
             attributeCount: 0,
-            loading: true
+            loading: true,
+            showModal: false,
+            uuidMainIcon: uuid.v1(),
+            uuidFileIcon: uuid.v1(),
+            uuidRegionIcon: uuid.v1(),
+            uuidNoteBookIcon: uuid.v1(),
+            uuidAttributeIcon: uuid.v1()
         }
     },
     props: {
         search:{
+            type: String
+        },
+        badge: {
             type: String
         }
     },
     methods: {
         onShow: function(){
             this.open = !this.open;
-            let mainIcon = document.getElementById('mainIcon');
+            let mainIcon = this.$refs.mainIcon;
             if(!this.open){
                 mainIcon.classList.remove('fa-mius');
                 mainIcon.classList.add('fa-plus');
@@ -136,10 +164,11 @@ export default {
                 mainIcon.classList.remove('fa-plus');
             }
             this.showAttributes();
+            console.log(this.showModal);
         },
         showFileType: function(){
             this.showFile = !this.showFile;
-            let fileIcon = document.getElementById('fileIcon');
+            let fileIcon = this.$refs.fileIcon;
             if(!this.showFile){
                 fileIcon.classList.remove('fa-minus');
                 fileIcon.classList.add('fa-plus');
@@ -160,7 +189,8 @@ export default {
         },
         showRegions: function(){
             this.showRegion = !this.showRegion;
-            let regionIcon = document.getElementById('regionIcon');
+            // let regionIcon = document.getElementById('uuidRegionIcon');
+            let regionIcon = this.$refs.regionIcon;
             if(!this.showRegion){
                 regionIcon.classList.remove('fa-minus');
                 regionIcon.classList.add('fa-plus');
@@ -180,7 +210,8 @@ export default {
         },
         showNotebooks: function(){
             this.showNotebook = !this.showNotebook;
-            let noteBookIcon = document.getElementById('noteBookIcon');
+            // let noteBookIcon = document.getElementById('uuidNoteBookIcon');
+            let noteBookIcon = this.$refs.noteBookIcon;
             if(this.showNotebook){
                 noteBookIcon.classList.add('fa-minus');
                 noteBookIcon.classList.remove('fa-plus');
@@ -200,8 +231,7 @@ export default {
         },
         showAttributes: function(){
             this.showAttribute = !this.showAttribute;
-            let attributeIcon = document.getElementById('attributeIcon');
-
+            let attributeIcon = this.$refs.attributeIcon;
             axios.get(`http://10.100.252.137:25009/getattributes/${this.search}`)
              .then(res => {
                  this.attributes = JSON.parse(res.data);
@@ -221,6 +251,13 @@ export default {
             }
 
             
+        },
+        showModalData: function(){
+            // this.showModal = true;
+            this.$refs.modal.classList.add('is-active');
+        },
+        closeModal: function(){
+            this.$refs.modal.classList.remove('is-active');
         }
     }
 }
